@@ -173,7 +173,7 @@ export class AuthService {
             <a href=${link} class="button">Validate Email</a>
         </div>
         <div class="footer">
-            <p>If you didn’t request this email, you can safely ignore it. If you have any questions, <a href="https://yourapp.com/support">contact us</a>.</p>
+            <p>If you didn’t request this email, you can safely ignore it.</p>
         </div>
     </div>
 </body>
