@@ -92,9 +92,93 @@ export class AuthService {
         const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
 
         const html = `
-        <h1>Validate your email</h1>
-        <p>Click the following link to validate your email</p>
-        <a href="${link}">Validate email</a>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validate Your Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .header {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 20px;
+            text-align: center;
+            color: #333333;
+        }
+        .content p {
+            margin: 15px 0;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+          .button {
+        display: inline-block;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold; /* Asegura que el texto sea más visible */
+        color: #ffffff !important; /* Forzamos el color blanco */
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        text-decoration: none;
+        text-align: center;
+        margin-top: 20px;
+        transition: background-color 0.3s ease;
+    }
+    .button:hover {
+        background-color: #0056b3;
+    }
+        .footer {
+            text-align: center;
+            padding: 10px;
+            font-size: 12px;
+            color: #777777;
+            background-color: #f9f9f9;
+        }
+        .footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Validate Your Email</h1>
+        </div>
+        <div class="content">
+            <p>Click the button below to validate your email and activate your account.</p>
+            <a href=${link} class="button">Validate Email</a>
+        </div>
+        <div class="footer">
+            <p>If you didn’t request this email, you can safely ignore it. If you have any questions, <a href="https://yourapp.com/support">contact us</a>.</p>
+        </div>
+    </div>
+</body>
+</html>
+
         `;
 
         const options: SendMailOptions = {
