@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 
 import { AuthService } from "../services/auth.service";
 import { CustomError, LoginUserDto, RegisterUserDto } from "../../domain";
+import { googleVerify } from "../../config/google-token.verify";
 
 
 export class AuthController {
@@ -48,9 +49,22 @@ export class AuthController {
             });
     }
 
+    loginGoogle = async (req: Request, res: Response) => {
+        const token = req.body.token;
+        const { name, email, picture } = await googleVerify(token);
+
+        this.authService.loginUserGoogle(name, email, picture)
+            .then((user) => {
+                res.json(user);
+            })
+            .catch((error) => {
+                this.handleError(error, res);
+            });
+    }
+
     validateEmail = (req: Request, res: Response) => {
         const token = req.params.token;
-        
+
         this.authService.validateEmail(token)
             .then(() => {
                 res.json({ message: 'Email validated' });

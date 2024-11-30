@@ -24,6 +24,8 @@ export class AuthRoutes {
 
         // Definir las rutas
         router.post('/login', controller.login);
+        //Login google
+        router.post('/login-google', controller.loginGoogle);
         router.post('/register', controller.register);
         router.get('/validate-email/:token', controller.validateEmail);
 

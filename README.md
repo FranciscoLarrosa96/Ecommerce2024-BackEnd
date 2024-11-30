@@ -12,5 +12,6 @@
 ## npm i nodemailer para los emails
 ## npm i bcryptjs -> hash password
 ## npm i npm i jsonwebtoken -> JWT
-
+## npm install google-auth-library --save => Para validar token de google
+## npm i cors 
 ### Creo directorio src y dentro la coneccion de mongoose

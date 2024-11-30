@@ -26,9 +26,6 @@ export class LoginUserDto {
             return ['Missing password'];
         }
 
-        if (password.length < 6) {
-            return ['Password must be at least 6 characters'];
-        }
 
         return [undefined, new LoginUserDto(email, password)];
 
