@@ -1,3 +1,4 @@
+
 import { bcryptAdapter, envs, jwtAdapter } from "../../config";
 import { UserModel } from "../../data";
 import { CustomError, LoginUserDto, RegisterUserDto, UserEntity } from "../../domain";
@@ -42,6 +43,43 @@ export class AuthService {
                 throw CustomError.internalServerError('Error generating token');
             }
             return { user: userEntity, token };
+        } catch (error) {
+            throw CustomError.internalServerError(`${error}`);
+        }
+    }
+
+    async loginUserGoogle(name: string, email: string, picture: string) {
+        try {
+            let userNew;
+            const userDb = await UserModel.findOne(
+                {
+                    email
+                }
+            );
+            if (userDb) {
+                return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email }) };
+            } else {
+                userNew = new UserModel(
+                    {
+                        name: name,
+                        email: email,
+                        emailVerified: true,
+                        password: '@@@',
+                        img: picture
+                    }
+                );
+
+                await userNew.save();
+                const token = await jwtAdapter.generateToken({ id: userNew.id, email: userNew.email });
+
+                if (!token) {
+                    throw CustomError.internalServerError('Error generating token');
+                }
+                const {password, ...user} = userNew;
+                console.log('user==>>>>', user);
+                
+                return {user, token };
+            }
         } catch (error) {
             throw CustomError.internalServerError(`${error}`);
         }
