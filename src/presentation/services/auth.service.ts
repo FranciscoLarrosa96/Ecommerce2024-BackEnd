@@ -37,7 +37,7 @@ export class AuthService {
             await this.sendValidationEmail(newUser.email);
 
             const { password, ...userEntity } = UserEntity.fromObject(newUser);
-            const token = await jwtAdapter.generateToken({ id: newUser._id, email: newUser.email });
+            const token = await jwtAdapter.generateToken({ id: newUser._id, email: newUser.email, name: newUser.name, lastName: newUser.lastName });
 
             if (!token) {
                 throw CustomError.internalServerError('Error generating token');
@@ -57,7 +57,7 @@ export class AuthService {
                 }
             );
             if (userDb) {
-                return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email }) };
+                return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email, name: userDb.name, lastName: userDb.lastName }) };
             } else {
                 userNew = new UserModel(
                     {
@@ -75,10 +75,9 @@ export class AuthService {
                 if (!token) {
                     throw CustomError.internalServerError('Error generating token');
                 }
-                const {password, ...user} = userNew;
-                console.log('user==>>>>', user);
-                
-                return {user, token };
+                const { password, ...user } = userNew;
+
+                return { user, token };
             }
         } catch (error) {
             throw CustomError.internalServerError(`${error}`);
@@ -106,7 +105,7 @@ export class AuthService {
 
         const { password, ...userEntity } = UserEntity.fromObject(user);
 
-        const token = await jwtAdapter.generateToken({ id: user._id, email: user.email });
+        const token = await jwtAdapter.generateToken({ id: user._id, email: user.email, name: user.name, lastName: user.lastName });
 
         if (!token) {
             throw CustomError.internalServerError('Error generating token');
@@ -126,7 +125,7 @@ export class AuthService {
         if (!token) {
             throw CustomError.internalServerError('Error generating token');
         }
-
+        //TODO: redireccionar a la página de validación o app
         const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
 
         const html = `
