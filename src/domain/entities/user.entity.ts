@@ -5,6 +5,7 @@ export class UserEntity {
     constructor(
         public readonly id: string,
         public readonly name: string,
+        public readonly lastName: string,
         public readonly email: string,
         public readonly emailVerified: boolean,
         public readonly password: string,
@@ -17,6 +18,7 @@ export class UserEntity {
             id,
             _id,
             name,
+            lastName,
             email,
             emailVerified,
             password,
@@ -40,10 +42,10 @@ export class UserEntity {
             throw CustomError.badRequest('Missing emailVerified');
         }
 
-        if(!password) {
+        if (!password) {
             throw CustomError.badRequest('Missing password');
         }
 
-        return new UserEntity(_id || id, name, email, emailVerified, password, role, img);
+        return new UserEntity(_id || id, name, lastName, email, emailVerified, password, role, img);
     }
 }

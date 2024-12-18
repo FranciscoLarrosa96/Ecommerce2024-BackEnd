@@ -4,6 +4,7 @@ import { regularExps } from "../../../config";
 export class RegisterUserDto {
     private constructor(
         public readonly name: string,
+        public readonly lastName: string,
         public readonly email: string,
         public readonly password: string,
     ) { }
@@ -14,6 +15,7 @@ export class RegisterUserDto {
             name,
             email,
             password,
+            lastName
         } = object;
 
         if (!name) {
@@ -36,7 +38,7 @@ export class RegisterUserDto {
             return ['Password must be at least 6 characters'];
         }
 
-        return [undefined, new RegisterUserDto(name, email, password)];
+        return [undefined, new RegisterUserDto(name, lastName, email, password)];
 
     }
 }

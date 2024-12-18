@@ -75,10 +75,9 @@ export class AuthService {
                 if (!token) {
                     throw CustomError.internalServerError('Error generating token');
                 }
-                const {password, ...user} = userNew;
-                console.log('user==>>>>', user);
-                
-                return {user, token };
+                const { password, ...user } = userNew;
+
+                return { user, token };
             }
         } catch (error) {
             throw CustomError.internalServerError(`${error}`);
@@ -126,7 +125,7 @@ export class AuthService {
         if (!token) {
             throw CustomError.internalServerError('Error generating token');
         }
-
+        //TODO: redireccionar a la página de validación o app
         const link = `${envs.WEBSERVICE_URL}/auth/validate-email/${token}`;
 
         const html = `
