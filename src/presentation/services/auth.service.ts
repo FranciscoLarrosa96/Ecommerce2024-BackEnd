@@ -37,7 +37,7 @@ export class AuthService {
             await this.sendValidationEmail(newUser.email);
 
             const { password, ...userEntity } = UserEntity.fromObject(newUser);
-            const token = await jwtAdapter.generateToken({ id: newUser._id, email: newUser.email, name: newUser.name, lastName: newUser.lastName });
+            const token = await jwtAdapter.generateToken({ id: newUser._id, email: newUser.email });
 
             if (!token) {
                 throw CustomError.internalServerError('Error generating token');
@@ -57,7 +57,7 @@ export class AuthService {
                 }
             );
             if (userDb) {
-                return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email, name: userDb.name, lastName: userDb.lastName }) };
+                return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email }) };
             } else {
                 userNew = new UserModel(
                     {
@@ -105,7 +105,7 @@ export class AuthService {
 
         const { password, ...userEntity } = UserEntity.fromObject(user);
 
-        const token = await jwtAdapter.generateToken({ id: user._id, email: user.email, name: user.name, lastName: user.lastName });
+        const token = await jwtAdapter.generateToken({ id: user._id, email: user.email });
 
         if (!token) {
             throw CustomError.internalServerError('Error generating token');
