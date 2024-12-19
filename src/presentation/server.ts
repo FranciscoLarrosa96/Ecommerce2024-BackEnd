@@ -58,4 +58,8 @@ export class Server {
     this.serverListener?.close();
   }
 
+  getExpressInstance() {
+    return this.app; // Devuelve la instancia de Express
+  }
+
 }
