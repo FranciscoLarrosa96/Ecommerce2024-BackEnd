@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
         type: [String],
         default: ["USER"],
         enum: ["ADMIN", "USER"],
+    },
+    googleUser: {
+        type: Boolean,
+        default: false,
     }
 });
 

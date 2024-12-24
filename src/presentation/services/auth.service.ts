@@ -56,14 +56,16 @@ export class AuthService {
                     email
                 }
             );
-            if (userDb) {
+            if (userDb && userDb.googleUser) {
                 return { user: userDb, token: await jwtAdapter.generateToken({ id: userDb.id, email: userDb.email }) };
+            } else if (userDb && !userDb.googleUser) {
+                throw CustomError.badRequest('Email already registered');
             } else {
                 userNew = new UserModel(
                     {
                         name: name,
                         email: email,
-                        emailVerified: true,
+                        googleUser: true,
                         password: '@@@',
                         img: picture
                     }

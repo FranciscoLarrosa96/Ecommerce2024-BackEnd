@@ -10,6 +10,7 @@ export class UserEntity {
         public readonly emailVerified: boolean,
         public readonly password: string,
         public readonly role: string[],
+        public readonly googleUser: boolean,
         public readonly img?: string,
     ) { }
 
@@ -23,7 +24,8 @@ export class UserEntity {
             emailVerified,
             password,
             role,
-            img
+            img,
+            googleUser
         } = user;
 
         if (!id && !_id) {
@@ -46,6 +48,6 @@ export class UserEntity {
             throw CustomError.badRequest('Missing password');
         }
 
-        return new UserEntity(_id || id, name, lastName, email, emailVerified, password, role, img);
+        return new UserEntity(_id || id, name, lastName, email, emailVerified, password, role, img, googleUser);
     }
 }
