@@ -10,8 +10,8 @@ export class UserEntity {
         public readonly emailVerified: boolean,
         public readonly password: string,
         public readonly role: string[],
-        public readonly googleUser: boolean,
-        public readonly img?: string,
+        public readonly img: string,
+        public readonly googleUser?: boolean,
     ) { }
 
     static fromObject(user: { [key: string]: any }) {

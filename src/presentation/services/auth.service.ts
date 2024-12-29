@@ -77,9 +77,9 @@ export class AuthService {
                 if (!token) {
                     throw CustomError.internalServerError('Error generating token');
                 }
-                const { password, ...user } = userNew;
+                const { password, ...userEntity } = UserEntity.fromObject(userNew);
 
-                return { user, token };
+                return { user: userEntity, token };
             }
         } catch (error) {
             throw CustomError.internalServerError(`${error}`);

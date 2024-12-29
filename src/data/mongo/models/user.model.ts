@@ -29,6 +29,7 @@ const userSchema = new mongoose.Schema({
     },
     img: {
         type: String,
+        default: "no-image.webp",
     },
     role: {
         type: [String],
