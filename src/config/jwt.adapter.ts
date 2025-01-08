@@ -5,10 +5,10 @@ const JWT_SECRET = envs.JWT_SECRET;
 
 export class jwtAdapter {
 
-    static async generateToken(payload: any, expiresIn: string = '2h') {
+    static async generateToken(payload: any, expiresIn: string = '2h'): Promise<string | null> {
         return new Promise((resolve) => {
             jwt.sign(payload, JWT_SECRET, { expiresIn }, (err, token) => {
-                if (err) {
+                if (err || !token) {
                     return resolve(null);
                 }
 
