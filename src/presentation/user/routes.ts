@@ -15,7 +15,7 @@ export class UserRoutes {
 
         // Definir las rutas
         // TODO:Falta agregar MIDDLEWARE que no funciona y manejar errores de token
-        router.get('/' ,controllerUser.getUserById);
+        router.get('/' ,[AuthMiddleware.validateJWT],controllerUser.getUserById);
 
 
         return router;
