@@ -15,6 +15,7 @@ export const envs = {
   SEND_EMAIL: get('SEND_EMAIL').default('false').asBool(),
   GOOGLE_CLIENT_ID: get('GOOGLE_CLIENT_ID').asString(),
   GOOGLE_SECRET: get('GOOGLE_SECRET').asString(),
+  MP_ACCESS_TOKEN: get('MP_ACCESS_TOKEN').asString(),
 }
 
 
