@@ -77,6 +77,7 @@ export class AuthService {
                 if (!token) {
                     throw CustomError.internalServerError('Error generating token');
                 }
+                await this.sendValidationEmail(userNew.email);
                 const { password, ...userEntity } = UserEntity.fromObject(userNew);
 
                 return { user: userEntity, token };
